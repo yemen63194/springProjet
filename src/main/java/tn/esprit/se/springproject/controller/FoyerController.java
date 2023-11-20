@@ -40,4 +40,11 @@ public class FoyerController {
         Foyer foyer= iFoyerService.updateFoyer(f);
         return foyer;
     }
+    @PutMapping("affecterFO")
+    @ResponseBody
+    public Foyer addFoyerWithBloc (Foyer foyer){
+        Foyer foyer1 = iFoyerService.addFoyerWithBloc( foyer);
+        return foyer1;
+
+    }
 }

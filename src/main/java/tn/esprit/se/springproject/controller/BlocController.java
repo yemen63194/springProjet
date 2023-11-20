@@ -41,6 +41,19 @@ public class BlocController {
         Bloc bloc= iBlocService.updateBloc(e);
         return bloc;
     }
+    @PutMapping("/affecter/{nomBloc}")
+    @ResponseBody
+    public Bloc affecterChambreABloc(@RequestBody List<Long>numeroChambre,@PathVariable("nomBloc") String nomBloc ) {
+        Bloc bloc = iBlocService.affecterChambreABloc(numeroChambre,nomBloc);
+        return bloc;
+    }
+
+    @PutMapping("/desaffecter/{numeroChambre}")
+    @ResponseBody
+    public Bloc desaffecterChambreDeBloc(@PathVariable("numeroChambre") List<Long> numeroChambre) {
+        Bloc bloc = iBlocService.desaffecterChambreDeBloc(numeroChambre);
+        return bloc;
+    }
 
 
 }
