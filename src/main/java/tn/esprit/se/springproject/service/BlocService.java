@@ -1,10 +1,15 @@
 package tn.esprit.se.springproject.service;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import tn.esprit.se.springproject.entity.Bloc;
 import tn.esprit.se.springproject.repository.BlocRepository;
 
 import java.util.List;
-
+@Service
+@Slf4j
+@AllArgsConstructor
 public class BlocService implements IBlocService{
     BlocRepository blocRepository;
     @Override
