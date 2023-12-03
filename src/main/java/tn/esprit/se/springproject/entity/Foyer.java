@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Set ;
+import java.util.Set;
 @Entity
 @Table(name = "Foyer")
 @Setter
@@ -23,6 +23,6 @@ public class Foyer implements Serializable {
     private Long capaciteFoyer;
     @OneToOne(mappedBy="foyer")
     private Universite universite;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="foyer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="foyer",fetch = FetchType.EAGER)
     private Set<Bloc> Blocs;
 }

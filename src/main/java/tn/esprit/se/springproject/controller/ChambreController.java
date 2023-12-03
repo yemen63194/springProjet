@@ -14,7 +14,7 @@ public class ChambreController {
     IChambreService iChambreService;
 
     @GetMapping("/allChambre")
-    public List<Chambre> getBloc() {
+    public List<Chambre> getChambre() {
         List<Chambre> listChambres = iChambreService.retrieveAllEtudiants();
         return listChambres;
     }
@@ -39,5 +39,17 @@ public class ChambreController {
     public Chambre updateBloc(@RequestBody Chambre c) {
         Chambre chambre= iChambreService.updateChambre(c);
         return chambre;
+    }
+    @GetMapping("/chambres/{nomBloc}")
+    public List<Chambre> getChambresParNomBloc( @PathVariable String nomBloc ){
+        return iChambreService.getChambresParNomBloc(nomBloc);
+    }
+
+    @GetMapping("/bloc/{idBloc}/chambres/count")
+    public long countChmbresByTypeAndBloc(
+            @PathVariable long idBloc,
+            @RequestParam("type") Chambre.TypeChambre type
+    ){
+        return iChambreService.nbChambreParTypeEtBloc(type,idBloc);
     }
 }

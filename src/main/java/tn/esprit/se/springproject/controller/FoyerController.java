@@ -40,11 +40,15 @@ public class FoyerController {
         Foyer foyer= iFoyerService.updateFoyer(f);
         return foyer;
     }
-    @PutMapping("affecterFO")
-    @ResponseBody
-    public Foyer addFoyerWithBloc (Foyer foyer){
-        Foyer foyer1 = iFoyerService.addFoyerWithBloc( foyer);
-        return foyer1;
+  //  @PostMapping("/affecterFO")
+ //   @ResponseBody
+  //  public Foyer addFoyerWithBloc (Foyer foyer){
+  //      Foyer foyer1 = iFoyerService.addFoyerWithBloc( foyer);
+    //    return foyer1;
 
-    }
+  //  }
+  @PostMapping("/ajouter_foyer_bloc")
+  public Foyer addFoyerWithBloc(@RequestBody Foyer foyer){
+      return iFoyerService.addFoyerWithBloc(foyer);
+  }
 }

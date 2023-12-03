@@ -19,4 +19,5 @@ public interface IBlocService {
     Bloc affecterChambreABloc(List<Long> numeroChambre, String nomBloc);
 
     Bloc desaffecterChambreDeBloc(List<Long> numeroChambre);
+    void cronMethod();
 }

@@ -41,9 +41,12 @@ public class EtudiantController {
         Etudiant etudiant= etudiantService.updateEtudiant(e);
         return etudiant;
     }
-    @PutMapping("/affecter/{nomEt}/{prenomEt}/{idReservation}")
-    public void affecterEtudiantAReservation(@PathVariable("nomEt")String nomEt,@PathVariable("prenomEt")String prenomEt,@PathVariable("idReservation")String idReservation){
+    @PutMapping("/etudiant_reservation/{nomEt}/{prenomEt}/{idReservation}")
+    @ResponseBody
+    public Etudiant affecterEtudiantAReservation(@PathVariable String nomEt, @PathVariable("prenomEt") String prenomEt,@PathVariable("idReservation") String idReservation) {
         Etudiant etudiant=etudiantService.affecterEtudiantAReservation(nomEt,prenomEt,idReservation);
+        return etudiant;
 
     }
+
 }

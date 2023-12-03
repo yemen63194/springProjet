@@ -3,10 +3,13 @@ package tn.esprit.se.springproject.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import tn.esprit.se.springproject.entity.Bloc;
 import tn.esprit.se.springproject.entity.Foyer;
 import tn.esprit.se.springproject.repository.BlocRepository;
 import tn.esprit.se.springproject.repository.FoyerRepository;
+
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -39,17 +42,16 @@ public class FoyerService implements IFoyerService{
         foyerRepository.deleteById(idFoyer);
     }
     @Override
-    public Foyer addFoyerWithBloc (Foyer foyer){
-        foyerRepository.save(foyer);
-        foyer.getBlocs().forEach(bloc -> {
-            bloc.setFoyer(foyer);
-            blocRepository.save(bloc);
-        });
-
-
-
-
-        return foyer;
+    public Foyer addFoyerWithBloc(Foyer foyer) {
+        Foyer Foyerr = foyerRepository.save(foyer);
+        Set<Bloc> blocs = Foyerr.getBlocs();
+        if (blocs != null && !blocs.isEmpty()) {
+            for (Bloc bloc : blocs) {
+                bloc.setFoyer(Foyerr);
+                blocRepository.save(bloc);
+            }
+        }
+        return Foyerr;
 
 
     }

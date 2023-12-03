@@ -2,13 +2,17 @@ package tn.esprit.se.springproject.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.se.springproject.entity.Bloc;
 import tn.esprit.se.springproject.entity.Chambre;
 import tn.esprit.se.springproject.repository.BlocRepository;
 import tn.esprit.se.springproject.repository.ChambreRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -41,7 +45,7 @@ public class BlocService implements IBlocService{
 
     @Override
     public Bloc affecterChambreABloc(List<Long> numeroChambre, String nomBloc) {
-        Bloc bloc = blocRepository.findBynomBloc(nomBloc);
+        Bloc bloc = blocRepository.findByNomBloc(nomBloc);
         for (Long numero : numeroChambre) {
             Chambre chambre = chambreRepository.findByNumeroChambre(numero);
             chambre.setBloc(bloc);
@@ -61,5 +65,20 @@ public class BlocService implements IBlocService{
             }
         }
         return null;
+    }
+    @Scheduled(cron = "0 */5 * * * *")
+    public void cronMethod() {
+        List<Bloc> blocs = (List<Bloc>) blocRepository.findAll();
+        for (Bloc bloc : blocs) {
+            log.info("bloc :"+bloc.getNomBloc()+"ayant une capacite de : "+bloc.getCapaciteBloc());
+            log.info("liste des champbres du bloc ");
+            Set<Chambre> chambresSet = bloc.getChambres();
+            List<Chambre> chambres = new ArrayList<>(chambresSet);
+            for (Chambre chambre : chambres) {
+                log.info(" chambre de numero : "+chambre.getNumeroChambre()+" de type : "+chambre.getTypeC());
+            }
+
+
+        }
     }
 }
